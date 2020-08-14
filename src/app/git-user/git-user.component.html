@@ -1,0 +1,58 @@
+<div class="container">
+  <h2></h2>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Git User List</div>
+    <!-- search bar fields -->
+    <div class="row">
+      <div class="example">
+        <input class="form-control" type="text" [(ngModel)]="namefilters" name="userfilter"
+          placeholder="Search by User Name..">
+      </div>
+    </div>
+
+    <!-- table to show list of git users -->
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Sl.No</th>
+            <th scope="col">Name</th>
+            <th scope="col">Login Type</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of userResponse| userfilter: namefilters;">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.login}}</td>
+            <td>{{item.type}}</td>
+            <button type="button" id="popupshow" class="btn btn-primary" data-toggle="modal" data-target="#openModal"
+              (click)="showModal(item.id)">More ..</button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal popup -->
+<div class="modal " [class.show]="show" id="openModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Repository Details</h5>
+
+      </div>
+      <div class="modal-body">
+        <p>Repository URL - <b>{{reposit}}</b></p>
+        <p>Organization URL - <b>{{orgURL}}</b></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="closeModal()">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
